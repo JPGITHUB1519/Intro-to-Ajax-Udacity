@@ -1,0 +1,14 @@
+google : AIzaSyBZEG7dhCGFgYOBbL0ZGSYcTyty9PGIbz4
+new york times : 177776b81598427580b2f5b4ec555c
+
+/*
+https://maps.googleapis.com/maps/api/streetview?size=400x400&location=40.720032,-73.988354
+&fov=90&heading=235&pitch=10
+&key=AIzaSyBZEG7dhCGFgYOBbL0ZGSYcTyty9PGIbz4
+
+Central Park West, New York, NY 10023, EE. UU.
+
+
+160 pensilvania ave, washington dc
+
+/*
