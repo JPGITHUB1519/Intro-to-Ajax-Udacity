@@ -50,11 +50,7 @@ class MainHandler(Handler):
     	story = ndb.Key(Story, data['storyKey']).get()
     	story.vote_count = story.vote_count + 1
     	story.put()
-
-        result = {"content" : story.content, "likes" : story.likes}
-        result = json.dumps(result)
-        logging.error(result)
-    	self.response.out.write(result)
+    	self.response.out.write(json.dumps(({'story': story.to_dict()})))
 
 app = webapp2.WSGIApplication([
     ('/ajax', MainHandler)

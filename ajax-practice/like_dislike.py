@@ -51,7 +51,10 @@ class MainHandler(Handler):
     	# load json from request
         data = json.loads(self.request.body)
         post = ndb.Key(Post, data['post']).get()
-        post.likes = post.likes + 1
+        if data["option"] == "like" :
+            post.likes = post.likes + 1
+        else :
+            post.dislikes = post.dislikes + 1
         post.put()
         self.response.out.write(json.dumps(({'post': post.to_dict()})))
 

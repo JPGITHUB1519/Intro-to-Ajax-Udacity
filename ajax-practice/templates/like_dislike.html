@@ -7,6 +7,8 @@
 <body>
 	<h1>Post : </h1> <p>{{ post.content }}</p> <span id="like-count">{{ post.likes }} </span><span> | </span>
 	<a href="javascript:Like('{{post.key.id()}}');">Like</a>
+	<span id="dislike-count" style="margin-left : 1em;">{{ post.dislikes }} </span><span> | </span>
+	<a href="javascript:DisLike('{{post.key.id()}}');">DisLike</a>
 
 	<script type="text/javascript">
 		function Like(post)
@@ -17,7 +19,7 @@
 				url : "/ajax",
 				datatype : "json",
 				// sent json to the server
-				data : JSON.stringify({"post" : post}),
+				data : JSON.stringify({"post" : post, "option" : "like"}),
 
 			})
 			.done(function(data)
@@ -25,6 +27,25 @@
 				//  //json response
 				// alert(data["post"]["likes"]);
 				$("#like-count").text(data["post"]["likes"])
+			});
+		}
+
+		function DisLike(post)
+		{
+			$.ajax(
+			{
+				type : "POST",
+				url : "/ajax",
+				datatype : "json",
+				// sent json to the server
+				data : JSON.stringify({"post" : post, "option" : "dislike"}),
+
+			})
+			.done(function(data)
+			{
+				//  //json response
+				// alert(data["post"]["likes"]);
+				$("#dislike-count").text(data["post"]["dislikes"])
 			});
 		}
 	</script>
