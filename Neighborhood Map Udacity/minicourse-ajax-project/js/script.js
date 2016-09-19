@@ -69,6 +69,7 @@ function loadData() {
         }
     });
 
+    // to not quit out the data
     return false;
 };
 

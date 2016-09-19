@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+	<title>Data</title>
+
+</head>
+<body>
+	<form method="post" id="form-container">
+		<div>
+			<label>Usuario</label>
+			<input type="text" name="" id="user">
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="text" name="" id="password">
+		</div>
+		<button>Submit</button>
+	</form>
+</body>
+<script type="text/javascript">
+	function loadData() {
+		var user = $("#user").val();
+		var password = $("#password").val();
+
+		$.ajax(
+		{
+			// requesting from the server
+			url : "/ajax/",
+			datatype : "json",
+			type : "post",
+			data : JSON.stringify({"user" : user, "password" : password})
+		})
+		.done(function(response)
+		{
+			alert("Enviados")
+		})
+		.fail(function()
+		{
+			alert("Error")
+		});
+
+			return false;
+		// pass function to submit button on click
+		$('#form-container').submit(loadData);
+		};
+
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+</head>
+<body>
+	<h2>{{story.title}}</h2>
+	<div>
+      <span class="voteCount">{{story.vote_count}}</span>  | <a href="javascript:VoteUp('{{story.key.id()}}');" >Vote Up Story</a>
+    </div>
+
+    <script>
+        function VoteUp(storyKey){
+            $.ajax({
+              type: "POST",
+              url: "/ajax",
+              dataType: 'json',
+              data: JSON.stringify({ "storyKey": storyKey})
+            })
+            // after i make the request, we save the the server response in the data variable. it occurs after the connection is ok
+            .done(function( data ) { // check why I use done
+                alert( "Vote Cast!!! Count is : " + data['story']['vote_count'] );
+                $('.voteCount').text(data['story']['vote_count']);
+            });
+        };
+     </script>
+</body>
+</html>

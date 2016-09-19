@@ -108,4 +108,5 @@ function loadData() {
     return false;
 };
 
+// pass function to submit button on click
 $('#form-container').submit(loadData);

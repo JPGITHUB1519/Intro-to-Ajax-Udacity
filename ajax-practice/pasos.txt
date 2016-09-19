@@ -1,0 +1,13 @@
+- en metodo get de plantilla mostrar pagina
+- Crear metodo ajax de tipo post
+- recibir respuesta en post del servidor y enviar mensaje al cliente
+- recibir mensaje del servidor y hacer algo.
+
+# requesting page
+client -> get request -> server
+client <- get response <- server
+
+# requesting asincronous post to server
+
+client -> ajax post resquest -> server
+client<- server_response <- server
