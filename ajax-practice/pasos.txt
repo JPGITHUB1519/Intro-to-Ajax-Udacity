@@ -10,4 +10,4 @@ client <- get response <- server
 # requesting asincronous post to server
 
 client -> ajax post resquest -> server
-client<- server_response <- server
+client <- server_response <- server

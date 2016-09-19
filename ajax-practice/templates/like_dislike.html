@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Like / Dislike</title>
+	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>Post : </h1> <p>{{ post.content }}</p> <span id="like-count">{{ post.likes }} </span><span> | </span>
+	<a href="javascript:Like('{{post.key.id()}}');">Like</a>
+
+	<script type="text/javascript">
+		function Like(post)
+		{
+			$.ajax(
+			{
+				type : "POST",
+				url : "/ajax",
+				datatype : "json",
+				// sent json to the server
+				data : JSON.stringify({"post" : post}),
+
+			})
+			.done(function(data)
+			{
+				//  //json response
+				// alert(data["post"]["likes"]);
+				$("#like-count").text(data["post"]["likes"])
+			});
+		}
+	</script>
+</body>
+</html>

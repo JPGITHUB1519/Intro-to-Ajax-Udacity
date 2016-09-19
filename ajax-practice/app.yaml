@@ -10,7 +10,7 @@ handlers:
   upload: favicon\.ico
 
 - url: .*
-  script: voting_app.app
+  script: like_dislike.app
 
 libraries:
 - name: webapp2

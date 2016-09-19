@@ -23,17 +23,16 @@ from google.appengine.ext import ndb
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader= jinja2.FileSystemLoader(template_dir), autoescape=True)
 
-class Story(ndb.Model) :
-	title = ndb.StringProperty(required = True)
-	vote_count = ndb.IntegerProperty(default = 0)
+class Post(ndb.Model) :
+	content = ndb.StringProperty(required = True)
+	likes = ndb.IntegerProperty(default = 0)
+	dislikes = ndb.IntegerProperty(default = 0)
 
 class Handler(webapp2.RequestHandler) :
 	def write(self, *a, **kw) :
-
 		self.response.out.write(*a, **kw)
 
 	def render_str(self, template, **params) :
-
 		t = jinja_env.get_template(template)
 		return t.render(params)
 
@@ -43,18 +42,21 @@ class Handler(webapp2.RequestHandler) :
 
 class MainHandler(Handler):
     def get(self):
-        story = Story.get_or_insert('some id or so', title = "A Voting Story Again")
-        self.render("voting.html", story = story)
-    def post(self) :
-    	data = json.loads(self.request.body)
-    	story = ndb.Key(Story, data['storyKey']).get()
-    	story.vote_count = story.vote_count + 1
-    	story.put()
+    	post = Post.get_or_insert("id", content = "THE AJAX CONQUER")
+    	self.render("like_dislike.html", post = post)
 
-        result = {"content" : story.content, "likes" : story.likes}
-        result = json.dumps(result)
-        logging.error(result)
-    	self.response.out.write(result)
+    def post(self) :
+    	# we have to put this for returning json
+        self.response.headers = {'Content-Type': 'application/json; charset=utf-8'}
+    	# load json from request
+        data = json.loads(self.request.body)
+        post = ndb.Key(Post, data['post']).get()
+        post.likes = post.likes + 1
+        post.put()
+        self.response.out.write(json.dumps(({'post': post.to_dict()})))
+
+    	# self.write(json.dumps({'post' : post.to_dict()}))
+    
 
 app = webapp2.WSGIApplication([
     ('/ajax', MainHandler)
