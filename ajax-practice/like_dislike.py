@@ -46,7 +46,9 @@ class MainHandler(Handler):
     	self.render("like_dislike.html", post = post)
 
     def post(self) :
-    	# we have to put this for returning json
+        # the method post will take the data from client and return something to the cliente
+    	
+        # we have to put this for returning json
         self.response.headers = {'Content-Type': 'application/json; charset=utf-8'}
     	# load json from request
         data = json.loads(self.request.body)

@@ -11,6 +11,8 @@
 	<a href="javascript:DisLike('{{post.key.id()}}');">DisLike</a>
 
 	<script type="text/javascript">
+	// the client will send data to server and receive what server returns
+	// all of this asincronous
 		function Like(post)
 		{
 			$.ajax(
